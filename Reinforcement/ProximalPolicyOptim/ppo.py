@@ -26,8 +26,8 @@ def collect_rollout(env, policy, n_steps, rollout, device=device):
         obs = torch_obs(next_obs, device)
         actions, logprobs, _, values = policy.get_action_and_value(obs)
 
-        rollout["obs_img"][step] = obs[0]
-        rollout["obs_vec"][step] = obs[1]
+        rollout["obs_img"][step] = obs
+        #rollout["obs_vec"][step] = obs[1]
         rollout["actions"][step] = actions
         rollout["logprobs"][step] = logprobs
         rollout["values"][step] = values.flatten()
