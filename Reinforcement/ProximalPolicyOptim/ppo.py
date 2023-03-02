@@ -127,15 +127,15 @@ def train(env, policy, optimizer, batch_size, epochs, end_step, rollout, clip_co
         print("Clip Fraction: {}".format(np.mean(clip_fracs)))
     return updates
         
-def PPO(env, policy, optimizer, max_steps, epochs, batch_size, frame_size, stack_size, num_agents=2, n_steps=10_000,
-    vec_obs_size=3, loss_coef=0.1, ent_coef=0.1, vf_coef=0.1, clip_coef=0.2, gamma=0.99, device=device):
+def PPO(env, policy, optimizer, max_steps, epochs, batch_size, n_steps=10_000,
+    vec_obs_size=4, loss_coef=0.1, ent_coef=0.1, vf_coef=0.1, clip_coef=0.2, gamma=0.99, device=device):
     total_steps = 0
     best_rewards = 0
     while total_steps < max_steps:
     
         # storage
         rollout = {}
-        rollout["obs_img"] = torch.zeros(n_steps, stack_size, *frame_size, device=device)
+        #rollout["obs_img"] = torch.zeros(n_steps, stack_size, *frame_size, device=device)
         rollout["obs_vec"]= torch.zeros(n_steps, vec_obs_size, device=device)
         rollout["actions"] = torch.zeros(n_steps, device=device)
         rollout["logprobs"] = torch.zeros(n_steps, device=device)
